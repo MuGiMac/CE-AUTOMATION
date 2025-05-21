@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import './CpuMemory.css'; // Import external CSS
+import './CpuMemory.css';
+import '../images/logo.png';
 
 const MOCK_DATA = [
   {
@@ -12,10 +13,59 @@ const MOCK_DATA = [
       { name: "###", cpu: 10, memory: 15 }
     ]
   },
-  // ... other server data
+  {
+    serverName: "MCHP029A",
+    cpuUsage: 68.2,
+    usedMemory: 3072,
+    totalMemory: 4096,
+    services: [
+      { name: "Tomcat", cpu: 25, memory: 40 },
+      { name: "###", cpu: 10, memory: 15 }
+    ]
+  },
+  {
+    serverName: "MCHP025A",
+    cpuUsage: 12.3,
+    usedMemory: 1024,
+    totalMemory: 2048,
+    services: [
+      { name: "Tomcat", cpu: 25, memory: 40 },
+      { name: "###", cpu: 10, memory: 15 }
+    ]
+  },
+  {
+    serverName: "MCHP027A",
+    cpuUsage: 89.9,
+    usedMemory: 6144,
+    totalMemory: 8192,
+    services: [
+      { name: "Tomcat", cpu: 25, memory: 40 },
+      { name: "###", cpu: 10, memory: 15 }
+    ]
+  },
+  {
+    serverName: "MCHP026A",
+    cpuUsage: 45.0,
+    usedMemory: 2048,
+    totalMemory: 8192,
+    services: [
+      { name: "Tomcat", cpu: 25, memory: 40 },
+      { name: "###", cpu: 10, memory: 15 }
+    ]
+  },
+  {
+    serverName: "MCHP028A",
+    cpuUsage: 56.5,
+    usedMemory: 4096,
+    totalMemory: 8192,
+    services: [
+      { name: "Tomcat", cpu: 25, memory: 40 },
+      { name: "###", cpu: 10, memory: 15 }
+    ]
+  }
 ];
 
-const Dashboard = () => {
+const CpuMemory = () => {
   const [servers, setServers] = useState([]);
 
   useEffect(() => {
@@ -40,21 +90,24 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="dashboard-container">
-      <nav className="dashboard-nav">
-        <div className="dashboard-nav-spacer"></div>
+    <div className="CpuMemory-container">
+      <nav className="CpuMemory-nav">
+        <div className="CpuMemory-logo">
+          <img src={require('../images/logo.png')} alt="Logo" className="CpuMemory-logo-img" />
+        </div>
+        <div className="CpuMemory-nav-spacer"></div>
       </nav>
 
-      <h1 className="dashboard-title">🖥️ Server CPU & Memory Dashboard</h1>
+      <h1 className="CpuMemory-title">🖥️ Server CPU & Memory Dashboard</h1>
 
-      <main className="dashboard-main">
-        <div className="dashboard-grid">
+      <main className="CpuMemory-main">
+        <div className="CpuMemory-grid">
           {servers.map((server, index) => {
             const memPercent = ((server.usedMemory / server.totalMemory) * 100).toFixed(1);
             return (
-              <div key={index} className="dashboard-card">
-                <h2 className="dashboard-card-title">{server.serverName}</h2>
-                <ul className="dashboard-card-list">
+              <div key={index} className="CpuMemory-card">
+                <h2 className="CpuMemory-card-title">{server.serverName}</h2>
+                <ul className="CpuMemory-card-list">
                   <li>
                     <strong>CPU Usage:</strong>{" "}
                     <span className={server.cpuUsage > 80 ? "alert" : "normal"}>
@@ -70,12 +123,12 @@ const Dashboard = () => {
                 </ul>
 
                 {server.services?.length > 0 && (
-                  <div className="dashboard-services">
+                  <div className="CpuMemory-services">
                     <strong>Services:</strong>
-                    <ul className="dashboard-service-list">
+                    <ul className="CpuMemory-service-list">
                       {server.services.map((svc, i) => (
-                        <li key={i} className="dashboard-service-item">
-                          <span className="dashboard-service-name">{svc.name}</span><br />
+                        <li key={i} className="CpuMemory-service-item">
+                          <span className="CpuMemory-service-name">{svc.name}</span><br />
                           <span className={svc.cpu > 80 ? "alert" : "normal"}>
                             CPU: {svc.cpu}% {svc.cpu > 80 && "⚠️"}
                           </span>{" "}
@@ -94,11 +147,11 @@ const Dashboard = () => {
         </div>
       </main>
 
-      <footer className="dashboard-footer">
-        © ******************************
+      <footer className="CpuMemory-footer">
+        © 2025 Mitel Networks Corporation
       </footer>
     </div>
   );
 };
 
-export default Dashboard;
+export default CpuMemory;

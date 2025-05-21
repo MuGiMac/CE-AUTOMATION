@@ -1,10 +1,10 @@
-.dashboard-container {
+.CpuMemory-container {
   padding: 20px;
   font-family: Arial, sans-serif;
 }
 
-.dashboard-nav {
-  background-color: navy;
+.CpuMemory-nav {
+  background-color: #15325f;
   padding: 12px 20px;
   color: white;
   display: flex;
@@ -13,27 +13,27 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.dashboard-nav-spacer {
+.CpuMemory-nav-spacer {
   height: 30px;
 }
 
-.dashboard-title {
+.CpuMemory-title {
   text-align: center;
 }
 
-.dashboard-main {
+.CpuMemory-main {
   flex: 1;
   padding: 20px;
   background-color: #f4f4f4;
 }
 
-.dashboard-grid {
+.CpuMemory-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 20px;
 }
 
-.dashboard-card {
+.CpuMemory-card {
   background-color: #ffffff;
   padding: 16px;
   border-radius: 8px;
@@ -41,29 +41,29 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.dashboard-card-title {
+.CpuMemory-card-title {
   margin-bottom: 10px;
   color: #333;
 }
 
-.dashboard-card-list {
+.CpuMemory-card-list {
   margin-left: 20px;
 }
 
-.dashboard-services {
+.CpuMemory-services {
   margin-top: 16px;
 }
 
-.dashboard-service-list {
+.CpuMemory-service-list {
   list-style: none;
   padding-left: 0;
 }
 
-.dashboard-service-item {
+.CpuMemory-service-item {
   margin: 8px 0;
 }
 
-.dashboard-service-name {
+.CpuMemory-service-name {
   font-weight: 500;
 }
 
@@ -75,8 +75,19 @@
   color: red;
 }
 
-.dashboard-footer {
-  background-color: navy;
+.CpuMemory-logo {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.CpuMemory-logo-img {
+  width: 150px;
+  height: auto;
+}
+
+.CpuMemory-footer {
+  background-color: #15325f;
   color: white;
   text-align: center;
   padding: 10px;

@@ -16,7 +16,7 @@ const MenuPage = () => {
         Check Processed LDAP Logs
       </button>
 
-      <button onClick={() => navigate('/dashboard')} className="menu-button">
+      <button onClick={() => navigate('/cpumemory')} className="menu-button">
         CPU and Memory Consumption
       </button>
 
