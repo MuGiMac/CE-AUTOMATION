@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import MenuPage from './components/Menus/MenuPage';
+import Dashboard from './components/CpuMemory/CpuMemory';
 
 
 function App() {
