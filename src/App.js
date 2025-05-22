@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import MenuPage from './components/Menus/MenuPage';
-import Dashboard from './components/CpuMemory/CpuMemory';
+import CpuMemory from './components/CpuMemory/CpuMemory';
+import ServerDetails from './components/ServerDetails/ServerDetails';
 
 
 function App() {
@@ -16,12 +17,14 @@ function App() {
         <Route path="/menu" element={
           loggedIn ? <MenuPage /> : <Navigate to="/" />
         } />
-        <Route path="/dashboard" element={
-          loggedIn ? <Dashboard /> : <Navigate to="/" />
+        <Route path="/cpumemory" element={
+          loggedIn ? <CpuMemory /> : <Navigate to="/" />
         } />
-      </Routes>
-    </Router>
-    
+        <Route path="/serverdetails" element={
+          loggedIn ? <ServerDetails /> : <Navigate to="/" />
+        } />
+    </Routes>
+  </Router>
   );
 }
 
