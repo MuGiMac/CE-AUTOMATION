@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './components/Login';
 import MenuPage from './components/Menus/MenuPage';
 import CpuMemory from './components/CpuMemory/CpuMemory';
+import ServerDetails from './components/ServerDetails/ServerDetails';
 
 
 function App() {
@@ -19,9 +20,11 @@ function App() {
         <Route path="/cpumemory" element={
           loggedIn ? <CpuMemory /> : <Navigate to="/" />
         } />
-      </Routes>
-    </Router>
-    
+        <Route path="/serverdetails" element={
+          loggedIn ? <ServerDetails /> : <Navigate to="/" />
+        } />
+    </Routes>
+  </Router>
   );
 }
 

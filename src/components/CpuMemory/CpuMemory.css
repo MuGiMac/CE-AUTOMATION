@@ -1,9 +1,16 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 .CpuMemory-container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .CpuMemory-nav {
+  flex-shrink: 0;
   background-color: #15325f;
   padding: 12px 20px;
   color: white;
@@ -87,6 +94,7 @@
 }
 
 .CpuMemory-footer {
+  flex-shrink: 0;
   background-color: #15325f;
   color: white;
   text-align: center;

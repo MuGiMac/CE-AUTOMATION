@@ -8,7 +8,7 @@ const MenuPage = () => {
     <div className="menu-page">
       <h1>CE Server Status & Performance</h1>
 
-      <button onClick={() => alert('Coming Soon')} className="menu-button">
+      <button onClick={() => navigate('/serverdetails')} className="menu-button">
         Server Details
       </button>
 

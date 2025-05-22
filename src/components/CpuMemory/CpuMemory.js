@@ -9,18 +9,20 @@ const MOCK_DATA = [
     usedMemory: 2048,
     totalMemory: 4096,
     services: [
-      { name: "Tomcat", cpu: 25, memory: 40 },
-      { name: "###", cpu: 10, memory: 15 }
+      { name: "Entrust GetAccess Service", cpu: 25, memory: 40 },
+      { name: "Dirx Service", cpu: 10, memory: 15 },
+      { name: "Tomcat", cpu: 10, memory: 15 }
     ]
   },
   {
-    serverName: "MCHP029A",
+    serverName: "MCHP026A",
     cpuUsage: 68.2,
     usedMemory: 3072,
     totalMemory: 4096,
     services: [
-      { name: "Tomcat", cpu: 25, memory: 40 },
-      { name: "###", cpu: 10, memory: 15 }
+      { name: "Entrust GetAccess Service", cpu: 25, memory: 40 },
+      { name: "IIS Service", cpu: 10, memory: 15 },
+      { name: "Tomcat", cpu: 10, memory: 15 }
     ]
   },
   {
@@ -29,28 +31,30 @@ const MOCK_DATA = [
     usedMemory: 1024,
     totalMemory: 2048,
     services: [
-      { name: "Tomcat", cpu: 25, memory: 40 },
-      { name: "###", cpu: 10, memory: 15 }
+      { name: "GAPortal1", cpu: 25, memory: 40 },
+      { name: "GAPortal2", cpu: 10, memory: 15 }
     ]
   },
   {
-    serverName: "MCHP027A",
+    serverName: "MCHP029A",
     cpuUsage: 89.9,
     usedMemory: 6144,
     totalMemory: 8192,
     services: [
-      { name: "Tomcat", cpu: 25, memory: 40 },
-      { name: "###", cpu: 10, memory: 15 }
+      { name: "Entrust GetAccess Service", cpu: 25, memory: 40 },
+      { name: "Dirx Service", cpu: 10, memory: 15 },
+      { name: "Tomcat", cpu: 10, memory: 15 }
     ]
   },
   {
-    serverName: "MCHP026A",
+    serverName: "MCHP028A",
     cpuUsage: 45.0,
     usedMemory: 2048,
     totalMemory: 8192,
     services: [
-      { name: "Tomcat", cpu: 25, memory: 40 },
-      { name: "###", cpu: 10, memory: 15 }
+      { name: "Entrust GetAccess Service", cpu: 25, memory: 40 },
+      { name: "IIS Service", cpu: 10, memory: 15 },
+      { name: "Tomcat", cpu: 10, memory: 15 }
     ]
   },
   {
@@ -59,8 +63,8 @@ const MOCK_DATA = [
     usedMemory: 4096,
     totalMemory: 8192,
     services: [
-      { name: "Tomcat", cpu: 25, memory: 40 },
-      { name: "###", cpu: 10, memory: 15 }
+      { name: "GAPortal1", cpu: 25, memory: 40 },
+      { name: "GAPortal2", cpu: 10, memory: 15 }
     ]
   }
 ];
