@@ -24,6 +24,7 @@ html, body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+
 .ServerDetails-table th,
 .ServerDetails-table td {
   padding: 12px 16px;
@@ -74,4 +75,27 @@ html, body {
   text-align: center;
   padding: 10px;
   margin: 0;
+}
+
+.export-button {
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #15325f;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.export-button:hover {
+  background-color: #274f8b;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 25px;
 }
