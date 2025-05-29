@@ -37,7 +37,7 @@ const exportToExcel = () => {
     'Server Name': server.name,
     'Host Name': server.hostName,
     'IP Address': server.ip,
-    'OS': server.os,
+    'OS Name': server.os,
     'RAM (GB)': server.ram,
     'Cores': server.cores,
     'Owner': server.owner,
@@ -99,18 +99,27 @@ const exportToExcel = () => {
               </tr>
             </thead>
             <tbody>
-              {serverData.map((server, index) => (
-                <tr key={index}>
-                  <td>{server.name}</td>
-                  <td>{server.hostName}</td>
-                  <td>{server.ip}</td>
-                  <td>{server.os}</td>
-                  <td>{server.ram}</td>
-                  <td>{server.cores}</td>
-                  <td>{server.owner}</td>
-                  <td>{server.env}</td>
-                </tr>
-              ))}
+              {serverData.map((server, index) => {
+                let rowClass = '';
+                if (['MCHP021A', 'MCHP026A', 'MCHP025A'].includes(server.name)) {
+                  rowClass = 'highlight-green';
+                } else if (['MCHP029A', 'MCHP028A', 'MCHP027A'].includes(server.name)) {
+                  rowClass = 'highlight-red';
+                }
+
+                return (
+                  <tr key={index} className={rowClass}>
+                    <td>{server.name}</td>
+                    <td>{server.hostName}</td>
+                    <td>{server.ip}</td>
+                    <td>{server.os}</td>
+                    <td>{server.ram}</td>
+                    <td>{server.cores}</td>
+                    <td>{server.owner}</td>
+                    <td>{server.env}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         )}

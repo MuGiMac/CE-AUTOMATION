@@ -41,6 +41,8 @@ const MOCK_DATA = [
   }
 ];
 
+const exportToExcel = () => { };
+
 const CpuMemory = () => {
   const [servers, setServers] = useState([]);
 
@@ -55,7 +57,7 @@ const CpuMemory = () => {
           usedMemory: Math.floor(Math.random() * server.totalMemory),
         }))
       );
-    }, 90000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);
@@ -69,7 +71,13 @@ const CpuMemory = () => {
         <div className="CpuMemory-nav-spacer"></div>
       </nav>
 
-      <h1 className="CpuMemory-title">🖥️ Server CPU & Memory Dashboard</h1>
+      <div className="header-row">
+        <h1 className="CpuMemory-title">🖥️ Server CPU & Memory Dashboard</h1>
+        <button onClick={exportToExcel} className="export-button">
+          Export
+        </button>
+      </div>
+      
 
       <main className="CpuMemory-main">
         <table className="CpuMemory-table">
@@ -83,8 +91,14 @@ const CpuMemory = () => {
           <tbody>
             {servers.map((server, index) => {
               const memPercent = ((server.usedMemory / server.totalMemory) * 100).toFixed(1);
+              let rowClass = '';
+              if (['MCHP021A', 'MCHP026A', 'MCHP025A'].includes(server.serverName)) {
+                rowClass = 'highlight-green';
+              } else if (['MCHP029A', 'MCHP028A', 'MCHP027A'].includes(server.serverName)) {
+                rowClass = 'highlight-red';
+              }
               return (
-                <tr key={index}>
+                <tr key={index} className={rowClass}>
                   <td>{server.serverName}</td>
                   <td className={server.cpuUsage > 80 ? 'alert' : 'normal'}>
                     {server.cpuUsage}% {server.cpuUsage > 80 && '⚠️'}
@@ -96,6 +110,7 @@ const CpuMemory = () => {
               );
             })}
           </tbody>
+
         </table>
       </main>
 

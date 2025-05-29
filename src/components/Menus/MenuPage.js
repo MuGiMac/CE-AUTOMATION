@@ -34,7 +34,7 @@ const MenuPage = () => {
             Check Windows Schedulers Status
           </button>
 
-          <button onClick={() => alert('Coming Soon')} className="menu-button">
+          <button onClick={() => navigate('/drivespace')} className="menu-button">
             Check Drive Free Space of all servers
           </button>
 
