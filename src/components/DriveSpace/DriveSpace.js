@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './DriveSpace.css';
-import logo from '../images/logo.png';
+import '../images/logo.png';
+import { Link } from 'react-router-dom';
 
 const INTEGRATION_SERVERS = ['MCHP021A', 'MCHP026A', 'MCHP025A'];
 const PRODUCTION_SERVERS = ['MCHP029A', 'MCHP028A', 'MCHP027A'];
@@ -121,20 +122,22 @@ const DriveSpace = () => {
     <div className="DriveSpace-container">
       <nav className="DriveSpace-nav">
         <div className="DriveSpace-logo">
-          <img src={logo} alt="Logo" className="DriveSpace-logo-img" />
+          <Link to="/menu">
+           <img src={require('../images/logo.png')} alt="Logo" className="CpuMemory-logo-img" />
+          </Link>
         </div>
         <div className="DriveSpace-nav-spacer"></div>
       </nav>
 
-      <div className="header-row">
-        <label htmlFor="serverFilter" className="serverFilter-label">Filter By Server :</label>
-        <select id="serverFilter" value={serverFilter} onChange={handleFilterChange} className="serverFilter" >
+      <div className="header-row-DriveSpace">
+        <label htmlFor="serverFilter" className="serverFilter-label-DriveSpace">Filter By Server Type :</label>
+        <select id="serverFilter" value={serverFilter} onChange={handleFilterChange} className="serverFilter-DriveSpace" >
           <option value="both">Both</option>
           <option value="integration">Integration</option>
           <option value="production">Production</option>
         </select>
         <h1 className="DriveSpace-title">💾 Server Drive Space Dashboard</h1>
-        <button onClick={exportToExcel} className="export-button">
+        <button onClick={exportToExcel} className="export-button-DriveSpace">
           Export
         </button>
       </div>
@@ -156,9 +159,9 @@ const DriveSpace = () => {
               let rowClass = '';
 
               if (INTEGRATION_SERVERS.includes(serverName)) {
-                rowClass = 'highlight-green';
+                rowClass = 'highlight-green-DriveSpace';
               } else if (PRODUCTION_SERVERS.includes(serverName)) {
-                rowClass = 'highlight-red';
+                rowClass = 'highlight-red-DriveSpace';
               }
 
               return (
@@ -168,7 +171,7 @@ const DriveSpace = () => {
                   <td>{total.toFixed(1)}</td>
                   <td>{used.toFixed(1)}</td>
                   <td>{free.toFixed(1)}</td>
-                  <td className={freePercent < 30 ? 'alert' : 'normal'}>
+                  <td className={freePercent < 30 ? 'alert-DriveSpace' : 'normal-DriveSpace'}>
                     {freePercent}% {freePercent < 30 && '⚠️'}
                   </td>
                 </tr>
