@@ -9,7 +9,7 @@ html, body {
   flex-direction: column;
 }
 
-.header-row {
+.header-row-DriveSpace {
   position: relative;
   display: flex;
   align-items: center;
@@ -18,19 +18,21 @@ html, body {
   padding: 0 20px;
 }
 
-.serverFilter-label {
+.serverFilter-label-DriveSpace {
   margin-left: 4px;;
   margin-right: 4px;
   font-size: 16px;
   font-weight: bold;
 }
 
-.serverFilter {
+.serverFilter-DriveSpace {
   margin-left: 4px; 
   margin-right: auto;
   padding: 4px 8px;
   font-size: 14px;
   font-weight: bold;
+  transition: background-color 0.3s ease;
+  cursor: pointer;  
 }
 
 .DriveSpace-title {
@@ -41,7 +43,7 @@ html, body {
   transform: translateX(-50%);
 }
 
-.export-button {
+.export-button-DriveSpace {
   margin-left: auto;
   margin-right: 3px;
   padding: 6px 4px;
@@ -57,17 +59,10 @@ html, body {
   text-align: center;
 }
 
-
 .DriveSpace-main {
   flex: 1;
   padding: 20px;
   background-color: #f4f4f4;
-}
-
-.DriveSpace-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
 }
 
 .DriveSpace-table {
@@ -99,20 +94,20 @@ html, body {
   background-color: #f1f1f1;
 }
 
-.highlight-green {
-  background-color: #b0e2bd !important; 
+.highlight-green-DriveSpace {
+  background-color: #e0f7fa !important; 
 }
 
-.highlight-red {
-  background-color: #ebc0c6 !important;
+.highlight-red-DriveSpace {
+  background-color: #a893e835 !important;
 }
 
-.normal {
-  color: green;
+.normal-DriveSpace {
+  color: rgb(0, 0, 0);
   font-weight: 600;
 }
 
-.alert {
+.alert-DriveSpace {
   color: red;
   font-weight: 700;
 }
@@ -126,10 +121,6 @@ html, body {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.DriveSpace-nav-spacer {
-  padding: 20px 20px;
 }
 
 .DriveSpace-logo {
