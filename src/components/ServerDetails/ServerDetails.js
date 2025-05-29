@@ -1,111 +1,128 @@
 import { useEffect, useState } from 'react';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 import './ServerDetails.css';
-import '../images/logo.png';
-
-const serverData = [
-  {
-    name: "MCHP021A",
-    hostName: "mchp021a.unify.com",
-    ip: "172.29.37.189",
-    os: "Windows",
-    ram: 8,
-    owner: "Didier Genard",
-    env: "Integration",
-    status: "Running"
-  },
-  {
-    name: "MCHP026A",
-    hostName: "mchp026a.unify.com",
-    ip: "172.29.37.229",
-    os: "Windows",
-    ram: 8,
-    owner: "Didier Genard",
-    env: "Integration",
-    status: "Running"
-  },
-  {
-    name: "MCHP025A",
-    hostName: "mchp025a.unify.com",
-    ip: "172.29.38.122",
-    os: "Windows",
-    ram: 8,
-    owner: "Didier Genard",
-    env: "Integration",
-    status: "Running"
-  },
-  {
-    name: "MCHP029A",
-    hostName: "mchp029a.unify.com",
-    ip: "172.29.37.221",
-    os: "Windows",
-    ram: 8,
-    owner: "Didier Genard",
-    env: "Production",
-    status: "Running"
-  },
-  {
-    name: "MCHP028A",
-    hostName: "mchp028a.unify.com",
-    ip: "172.29.37.224",
-    os: "Windows",
-    ram: 8,
-    owner: "Didier Genard",
-    env: "Production",
-    status: "Running"
-  },
-  {
-    name: "MCHP027A",
-    hostName: "mchp027a.unify.com",
-    ip: "172.29.38.98",
-    os: "Windows",
-    ram: 8,
-    owner: "Didier Genard",
-    env: "Production",
-    status: "Running"
-  }
-];
+import logo from '../images/logo.png';
 
 const ServerDetails = () => {
+  const [serverData, setServerData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/servers')
+      .then(response => response.json())
+      .then(data => {
+        const transformed = data.map(server => ({
+          name: server.name,
+          hostName: server.host_name,
+          ip: server.ip_address,
+          os: server.os_name,
+          ram: server.ram_gb,
+          cores: server.cores,
+          owner: server.owner,
+          env: server.environment,
+        }));
+        setServerData(transformed);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching server data:', error);
+        setLoading(false);
+      });
+  }, []);
+
+
+const exportToExcel = () => {
+  const filteredData = serverData.map(server => ({
+    'Server Name': server.name,
+    'Host Name': server.hostName,
+    'IP Address': server.ip,
+    'OS Name': server.os,
+    'RAM (GB)': server.ram,
+    'Cores': server.cores,
+    'Owner': server.owner,
+    'Environment': server.env
+  }));
+
+  const worksheet = XLSX.utils.json_to_sheet(filteredData);
+
+  const columnWidths = Object.keys(filteredData[0]).map(key => {
+    const maxLength = Math.max(
+      key.length,
+      ...filteredData.map(row => String(row[key] || '').length)
+    );
+    return { wch: maxLength + 2 };
+  });
+
+  worksheet['!cols'] = columnWidths;
+
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Servers');
+
+  const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  const data = new Blob([excelBuffer], { type: 'application/octet-stream' });
+
+  saveAs(data, 'server_details.xlsx');
+};
+
   return (
     <div className="ServerDetails-container">
       <nav className="ServerDetails-nav">
         <div className="ServerDetails-logo">
-          <img src={require('../images/logo.png')} alt="Logo" className="ServerDetails-logo-img" />
+          <img src={logo} alt="Logo" className="ServerDetails-logo-img" />
         </div>
         <div className="ServerDetails-nav-spacer"></div>
       </nav>
 
-      <h1 className="ServerDetails-title">🖥️ Server Details</h1>
+      <div className="header-row">
+        <h1 className="ServerDetails-title">🖥️ Server Details</h1>
+        <button onClick={exportToExcel} className="export-button">
+          Export
+        </button>
+      </div>
 
       <main className="ServerDetails-main">
-        <table className="ServerDetails-table">
-          <thead>
-            <tr>
-              <th>Server Name</th>
-              <th>Host Name</th>
-              <th>IP Address</th>
-              <th>OS Type</th>
-              <th>RAM (GB)</th>
-              <th>Owner</th>
-              <th>Environment</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {serverData.map((server, index) => (
-              <tr key={index}>
-                <td>{server.name}</td>
-                <td>{server.hostName}</td>
-                <td>{server.ip}</td>
-                <td>{server.os}</td>
-                <td>{server.ram}</td>
-                <td>{server.owner}</td>
-                <td>{server.env}</td>
-                <td>{server.status}</td>
+        {loading ? (
+          <p>Loading server data...</p>
+        ) : (
+          <table className="ServerDetails-table">
+            <thead>
+              <tr>
+                <th>Server Name</th>
+                <th>Host Name</th>
+                <th>IP Address</th>
+                <th>OS Name</th>
+                <th>RAM (GB)</th>
+                <th>Core(s)</th>
+                <th>Owner</th>
+                <th>Environment</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {serverData.map((server, index) => {
+                let rowClass = '';
+                if (['MCHP021A', 'MCHP026A', 'MCHP025A'].includes(server.name)) {
+                  rowClass = 'highlight-green';
+                } else if (['MCHP029A', 'MCHP028A', 'MCHP027A'].includes(server.name)) {
+                  rowClass = 'highlight-red';
+                }
+
+                return (
+                  <tr key={index} className={rowClass}>
+                    <td>{server.name}</td>
+                    <td>{server.hostName}</td>
+                    <td>{server.ip}</td>
+                    <td>{server.os}</td>
+                    <td>{server.ram}</td>
+                    <td>{server.cores}</td>
+                    <td>{server.owner}</td>
+                    <td>{server.env}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
       </main>
 
       <footer className="ServerDetails-footer">
